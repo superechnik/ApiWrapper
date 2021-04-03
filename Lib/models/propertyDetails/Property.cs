@@ -1,6 +1,5 @@
 #nullable enable
-namespace Lib.models.propertyDetails {
-
+namespace Lib.Models.HouseCanary {
     public class Property {
         public string? Air_conditioning {get; set;}
         public bool Attic {get ;set;}
@@ -32,6 +31,9 @@ namespace Lib.models.propertyDetails {
         public string? Water {get; set;}
         public int? Year_built {get; set;}
         public string? Zoning {get; set;}
+
+        public void SetBaths() =>
+            Total_bath_count = Partial_bath_count + Full_bath_count;
 
     }
 
