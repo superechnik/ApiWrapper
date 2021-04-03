@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Lib.models.propertyDetails
+namespace Lib.Models.HouseCanary
 {
     public class Root
     {
