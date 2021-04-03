@@ -1,6 +1,6 @@
 ﻿using Lib.Models.HouseCanary;
 
-namespace Fake.Services
+namespace Lib.Services.Mock
 {
     public interface IResponseMocker
     {

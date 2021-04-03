@@ -1,4 +1,4 @@
-﻿namespace Fake.Services
+﻿namespace Lib.Services.Mock
 {
     public static class HouseCanaryData
     {

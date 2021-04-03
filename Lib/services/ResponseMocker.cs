@@ -2,7 +2,7 @@
 using Lib.Models.HouseCanary;
 using Faker;
 
-namespace Fake.Services
+namespace Lib.Services.Mock
 {
     public class ResponseMocker : IResponseMocker
     {
