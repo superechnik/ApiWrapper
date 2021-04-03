@@ -20,13 +20,18 @@ namespace Fake
           
             var result = new models.propertyDetails.Result()
             {
-                assessment = assessment,
-                property = property
+                Assessment = assessment,
+                Property = property
+            };
+
+            var propertyDetails = new models.propertyDetails.PropertyDetails()
+            {
+                Result = result
             };
 
             var response = new models.propertyDetails.Root()
             {
-                result = result
+                PropertyDetails = propertyDetails
             };
             
 

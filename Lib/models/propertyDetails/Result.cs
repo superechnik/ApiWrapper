@@ -1,8 +1,8 @@
 namespace Lib.models.propertyDetails{
     public class Result {
 
-        public Property property {get; set;}
-        public Assessment assessment {get; set;}
+        public Property Property {get; set;}
+        public Assessment Assessment {get; set;}
     }
 
 }

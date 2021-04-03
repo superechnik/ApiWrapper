@@ -1,7 +1,15 @@
-namespace Lib.models.propertyDetails{
-    public class Root {
-        public string api_code_description {get ;set;}
-        public int api_code {get; set;}
-        public Result result {get; set;}
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
+
+namespace Lib.models.propertyDetails
+{
+    public class Root
+    {
+        [JsonPropertyName("property/details")]
+        public PropertyDetails PropertyDetails { get; set; }
     }
 }
