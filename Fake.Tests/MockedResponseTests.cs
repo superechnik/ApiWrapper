@@ -1,5 +1,5 @@
 using Xunit;
-using Fake.Services;
+using Lib.Services.Mock;
 
 namespace Fake.Tests
 {
