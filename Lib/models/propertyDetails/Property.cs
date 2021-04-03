@@ -10,7 +10,7 @@ namespace Lib.models.propertyDetails {
         public int? Building_quality_score {get; set;}
         public string? Construction_type {get; set;}
         public string? Exterior_walls {get; set;}
-        public string? Fireplace {get; set;}
+        public bool Fireplace {get; set;}
         public int? Full_bath_count {get ;set;}
         public int? Garage_parking_of_cars {get; set;}
         public string? Garage_type_parking {get ;set;}
