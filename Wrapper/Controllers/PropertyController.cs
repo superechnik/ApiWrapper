@@ -1,6 +1,7 @@
 ﻿using Lib.Extensions;
 using Lib.Models.PropertyDetails;
 using Lib.Services.Validation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Wrapper
 {
     [Route("api/[controller]")]
     [ApiController]
+    //Todo: add authorization
+    [AllowAnonymous]
     public class PropertyController : ControllerBase
     {
         private readonly IPropertyService _propertyService;
@@ -25,13 +28,22 @@ namespace Wrapper
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get a single SewerResponse from a Get request with query string params
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="unit"></param>
+        /// <param name="state"></param>
+        /// <param name="city"></param>
+        /// <param name="zipcode"></param>
+        /// <returns>SewerResponse</returns>
         [HttpGet]
         public async Task<IActionResult> Get (
-            [FromQuery] string address,
-            [FromQuery] string unit,
-            [FromQuery] string state,
-            [FromQuery] string city,
-            [FromQuery] string zipcode
+            //[FromQuery] string address,
+            //[FromQuery] string unit,
+            //[FromQuery] string state,
+            //[FromQuery] string city,
+            //[FromQuery] string zipcode
             )
         {
 
@@ -59,6 +71,11 @@ namespace Wrapper
             }
         }
 
+        /// <summary>
+        /// Get a list of sewer reponse from a post request with a list of body: Lookup
+        /// </summary>
+        /// <param name="lookups"></param>
+        /// <returns>List of SewerResponse</returns>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] IEnumerable<Lookup> lookups)
         {
@@ -81,5 +98,6 @@ namespace Wrapper
             }
 
         }
+
     }
 }
