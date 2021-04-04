@@ -15,6 +15,11 @@ You should have a successful build:
 ![image](https://user-images.githubusercontent.com/10968503/113521652-d35a9b00-9568-11eb-9bf7-715c775a070d.png)
 
 To use the app, Postman, Curl or whatever to the Wrapper endpoint at GET:https://localhost:5001/
+
+You also have the option to use the Swagger UI at https://localhost:5001/swagger
+
+![image](https://user-images.githubusercontent.com/10968503/113522319-731a2800-956d-11eb-90b1-b45b94ba9863.png)
+
 Acceptable query string combinations are:
 `address="some address"
 zipcode="some zipcode"`
