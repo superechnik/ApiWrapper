@@ -48,14 +48,15 @@ namespace Lib.Models.PropertyDetails
                 sb.Append($"Unit={Unit}&");
             }
 
-            if (State is not null)
-            {
-                sb.Append($"State={State}");
-            }
-
             if (City is not null)
             {
-                sb.Append($"City={City}");
+                sb.Append($"City={City}&");
+            }
+
+            if (State is not null)
+            {
+                sb.Append($"State={State}&");
+
             }
 
             if (Zipcode is not null)

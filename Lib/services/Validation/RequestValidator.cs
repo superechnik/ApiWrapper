@@ -26,7 +26,6 @@ namespace Lib.Services.Validation
                             lookup.City is null ||
                             lookup.State is null
                         )
-
                     );
 
                 if (missingValue)

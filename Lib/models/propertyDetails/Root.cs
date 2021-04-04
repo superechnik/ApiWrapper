@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Lib.Models.Sewer;
+﻿using System.Text.Json.Serialization;
 
 namespace Lib.Models.HouseCanary
 {
@@ -21,10 +15,7 @@ namespace Lib.Models.HouseCanary
 
         public bool IsSeptic()
         {
-            var sewer = PropertyDetails
-                .Result
-                .Property
-                .Sewer;
+            var sewer = SewerType;
 
             return sewer is not null && sewer == "Septic";
 
