@@ -1,4 +1,5 @@
-﻿using Lib.Models.PropertyDetails;
+﻿using Lib.Extensions;
+using Lib.Models.PropertyDetails;
 using Lib.Services.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,7 +15,7 @@ namespace Wrapper
     public class PropertyController : ControllerBase
     {
         private readonly IPropertyService _propertyService;
-        private ILogger<PropertyController> _logger;
+        private readonly ILogger<PropertyController> _logger;
 
         public PropertyController(
             IPropertyService propertyService,
@@ -33,6 +34,7 @@ namespace Wrapper
             [FromQuery] string zipcode
             )
         {
+            
             //validate url parameters
             IEnumerable<Lookup> lookups = new List<Lookup>()
             {
@@ -56,7 +58,7 @@ namespace Wrapper
 
                 var data = await _propertyService.GetPropertyData(lookups.FirstOrDefault());
 
-                return Ok(_propertyService.GetSewerResponse(data));
+                return Ok(data.GetSewerResponse());
 
             }
             catch (System.Exception ex)
@@ -78,7 +80,7 @@ namespace Wrapper
             {
                 var data = await _propertyService.GetPropertyData(lookups);
 
-                return Ok(_propertyService.GetSewerResponse(data));
+                return Ok(data.GetSewerResponse());
 
             }
             catch (System.Exception ex)

@@ -37,33 +37,6 @@ namespace Wrapper.Services
             return JsonSerializer.Deserialize<IEnumerable<Root>>(await x.Content.ReadAsStringAsync(), options);
         }
 
-        public SewerResponse GetSewerResponse(Root root) {
-
-            var sewer = root
-                .PropertyDetails
-                .Result
-                .Property
-                .Sewer;
-
-            return new SewerResponse()
-            {
-                SewerType = sewer,
-                IsSeptic = root.PropertyDetails.Result.Property.IsSeptic()
-            };
-
-        }
-
-        public IEnumerable<SewerResponse> GetSewerResponse(IEnumerable<Root> roots)
-        {
-            var sewerReponse = new List<SewerResponse>();
-
-            foreach (var root in roots)
-            {
-                sewerReponse.Add(GetSewerResponse(root));
-            }
-
-            return sewerReponse;
-        }
-  
+        
     }
 }

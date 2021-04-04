@@ -13,5 +13,25 @@ namespace Lib.Models.HouseCanary
         [JsonPropertyName("property/details")]
         public PropertyDetails PropertyDetails { get; set; }
 
+        public IEnumerable<PropertyDetails> ToList() =>
+            new List<PropertyDetails>() { PropertyDetails };
+
+        public string SewerType =>
+            PropertyDetails
+                .Result
+                .Property
+                .Sewer;
+
+        public bool IsSeptic()
+        {
+            var sewer = PropertyDetails
+                .Result
+                .Property
+                .Sewer;
+
+            return sewer is not null && sewer == "Septic";
+
+        }
+
     }
 }

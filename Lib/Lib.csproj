@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Mock\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Faker.Net" Version="1.5.126" />
   </ItemGroup>
 
