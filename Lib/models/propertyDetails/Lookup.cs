@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Lib.Models.PropertyDetails
 {
@@ -32,6 +33,38 @@ namespace Lib.Models.PropertyDetails
 
         public IEnumerable<Lookup> ToList() =>
             new List<Lookup>() { this };
+
+        public string ToQueryString()
+        {
+            var sb = new StringBuilder("?");
+
+            if (Address is not null)
+            {
+                sb.Append($"Address={Address}&");
+            }
+
+            if (Unit is not null)
+            {
+                sb.Append($"Unit={Unit}&");
+            }
+
+            if (State is not null)
+            {
+                sb.Append($"State={State}");
+            }
+
+            if (City is not null)
+            {
+                sb.Append($"City={City}");
+            }
+
+            if (Zipcode is not null)
+            {
+                sb.Append($"Zipcode={Zipcode}");
+            }
+
+            return sb.ToString();
+        }
 
     }
 }
