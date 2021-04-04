@@ -1,8 +1,7 @@
 ﻿using Lib.Models.PropertyDetails;
 using Lib.Services.Validation;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,10 +14,14 @@ namespace Wrapper
     public class PropertyController : ControllerBase
     {
         private readonly IPropertyService _propertyService;
+        private ILogger<PropertyController> _logger;
 
-        public PropertyController(IPropertyService propertyService)
+        public PropertyController(
+            IPropertyService propertyService,
+            ILogger<PropertyController> logger)
         {
             _propertyService = propertyService;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -45,26 +48,45 @@ namespace Wrapper
 
             if (RequestValidator.ValuesMissing(lookups))
             {
-                return BadRequest("Url parameters must contain at least one non null value");
+                return BadRequest("Url parameters must contain non null property identifiers");
             }
-            
-            var data = await _propertyService.GetPropertyData(lookups.FirstOrDefault());
 
-            return Ok(_propertyService.GetSewerResponse(data));
+            try
+            {
 
+                var data = await _propertyService.GetPropertyData(lookups.FirstOrDefault());
+
+                return Ok(_propertyService.GetSewerResponse(data));
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Pst([FromBody] IEnumerable<Lookup> lookups)
+        public async Task<IActionResult> Post([FromBody] IEnumerable<Lookup> lookups)
         {
             if (RequestValidator.ValuesMissing(lookups))
             {
-                return BadRequest("Request body parameters must contain at least one non null value");
+                return BadRequest("Request body parameters must contain non null property identifiers");
             }
 
-            var data = await _propertyService.GetPropertyData(lookups);
+            try
+            {
+                var data = await _propertyService.GetPropertyData(lookups);
 
-            return Ok(_propertyService.GetSewerResponse(data));
+                return Ok(_propertyService.GetSewerResponse(data));
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+
         }
     }
 }
