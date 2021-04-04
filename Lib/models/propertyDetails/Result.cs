@@ -3,5 +3,6 @@ namespace Lib.Models.HouseCanary{
 
         public Property Property {get; set;}
         public Assessment Assessment {get; set;}
+
     }
 }

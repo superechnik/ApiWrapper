@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Lib.Models.PropertyDetails;
+using Lib.Models.Sewer;
 
 namespace Wrapper.Services
 {
@@ -30,8 +31,36 @@ namespace Wrapper.Services
 
             var x = await _http.PostAsJsonAsync("https://localhost:4431/api/property", lookup);
 
-            return JsonSerializer.Deserialize<List<Root>>(await x.Content.ReadAsStringAsync(), options);
+            return JsonSerializer.Deserialize<IEnumerable<Root>>(await x.Content.ReadAsStringAsync(), options);
         }
 
+        public SewerResponse GetSewerResponse(Root root) {
+
+            var sewer = root
+                .PropertyDetails
+                .Result
+                .Property
+                .Sewer;
+
+            return new SewerResponse()
+            {
+                SewerType = sewer,
+                IsSeptic = root.PropertyDetails.Result.Property.IsSeptic()
+            };
+
+        }
+
+        public IEnumerable<SewerResponse> GetSewerResponse(IEnumerable<Root> roots)
+        {
+            var sewerReponse = new List<SewerResponse>();
+
+            foreach (var root in roots)
+            {
+                sewerReponse.Add(GetSewerResponse(root));
+            }
+
+            return sewerReponse;
+        }
+  
     }
 }

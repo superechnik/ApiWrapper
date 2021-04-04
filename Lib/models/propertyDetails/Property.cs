@@ -35,6 +35,9 @@ namespace Lib.Models.HouseCanary {
         public void SetBaths() =>
             Total_bath_count = Partial_bath_count + Full_bath_count;
 
+        public bool IsSeptic() =>
+            Sewer is not null && Sewer == "Septic";           
+
     }
 
 }
