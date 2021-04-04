@@ -1,7 +1,7 @@
 ﻿using Lib.Models.PropertyDetails;
-using Microsoft.AspNetCore.Http;
+using Lib.Services.Validation;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,27 +14,79 @@ namespace Wrapper
     public class PropertyController : ControllerBase
     {
         private readonly IPropertyService _propertyService;
+        private ILogger<PropertyController> _logger;
 
-        public PropertyController(IPropertyService propertyService)
+        public PropertyController(
+            IPropertyService propertyService,
+            ILogger<PropertyController> logger)
         {
             _propertyService = propertyService;
+            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] string address, int zipCode)
+        public async Task<IActionResult> Get (
+            [FromQuery] string address,
+            [FromQuery] string unit,
+            [FromQuery] string state,
+            [FromQuery] string city,
+            [FromQuery] string zipcode
+            )
         {
-            var data = await _propertyService.GetPropertyData(address, zipCode);
+            //validate url parameters
+            IEnumerable<Lookup> lookups = new List<Lookup>()
+            {
+                new Lookup()
+                {
+                    Address = address,
+                    Unit = unit,
+                    State = state,
+                    City = city,
+                    Zipcode = zipcode
+                }
+            };
 
-            return Ok(_propertyService.GetSewerResponse(data));
+            if (RequestValidator.ValuesMissing(lookups))
+            {
+                return BadRequest("Url parameters must contain non null property identifiers");
+            }
 
+            try
+            {
+
+                var data = await _propertyService.GetPropertyData(lookups.FirstOrDefault());
+
+                return Ok(_propertyService.GetSewerResponse(data));
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Pst([FromBody] IEnumerable<Lookup> lookup)
+        public async Task<IActionResult> Post([FromBody] IEnumerable<Lookup> lookups)
         {
-            var data = await _propertyService.GetPropertyData(lookup);
+            if (RequestValidator.ValuesMissing(lookups))
+            {
+                return BadRequest("Request body parameters must contain non null property identifiers");
+            }
 
-            return Ok(_propertyService.GetSewerResponse(data));
+            try
+            {
+                var data = await _propertyService.GetPropertyData(lookups);
+
+                return Ok(_propertyService.GetSewerResponse(data));
+
+            }
+            catch (System.Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                throw;
+            }
+
         }
     }
 }
