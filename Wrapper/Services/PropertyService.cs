@@ -18,8 +18,11 @@ namespace Wrapper.Services
             _http = http;
         }
 
-        public async Task<Root> GetPropertyData(string address, int zipCode) =>
-            await _http.GetFromJsonAsync<Root>(endpoint);
+        public async Task<Root> GetPropertyData(Lookup lookup)
+        {
+            return await _http.GetFromJsonAsync<Root>(endpoint);
+
+        }
 
         public async Task<IEnumerable<Root>> GetPropertyData(IEnumerable<Lookup> lookup)
         {

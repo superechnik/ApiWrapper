@@ -4,8 +4,8 @@ using Lib.Services.Mock;
 using System.Collections.Generic;
 using Lib.Models.PropertyDetails;
 using Lib.Models.HouseCanary;
-using Lib.Models.Sewer;
 using Microsoft.Extensions.Logging;
+using Lib.Services.Validation;
 
 namespace Fake
 {
@@ -45,7 +45,6 @@ namespace Fake
             [FromQuery] string zipcode
             )
         {
-
             //validate url parameters
             var lookups = new List<Lookup>()
             {
@@ -59,7 +58,7 @@ namespace Fake
                 }
             };
 
-            if (ValuesMissing(lookups))
+            if (RequestValidator.ValuesMissing(lookups))
             {
                 return BadRequest("Url parameters must contain at least one non null value");
             }
@@ -87,7 +86,7 @@ namespace Fake
         public async Task<IActionResult> Details([FromBody] IEnumerable<Lookup> lookup)
         {
             //validate model
-            if (ValuesMissing(lookup))
+            if (RequestValidator.ValuesMissing(lookup))
             {
                 return BadRequest("All request bodies must contain at least one non null value");
             }
@@ -113,39 +112,5 @@ namespace Fake
 
         }
 
-        /// <summary>
-        /// Iterates of list of request bodies and breaks if all values in any one of them are null
-        /// </summary>
-        /// <param name="lookups"></param>
-        /// <returns>
-        /// bool signifying if the values are missing
-        /// </returns>
-        private static bool ValuesMissing(IEnumerable<Lookup> lookups)
-        {
-            bool missingValue = false;
-
-            foreach (var lookup in lookups)
-            {
-                missingValue =
-                    lookup.Address is null ||
-                    (
-                        lookup.Zipcode is null &&
-                        (
-                            lookup.City is null ||
-                            lookup.State is null
-                        )
-
-                    );
-
-                if (missingValue)
-                {
-                    break;
-                }
-            }
-
-            return missingValue;
-
-        }
-
-    }
+    } 
 }
