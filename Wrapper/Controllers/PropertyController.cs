@@ -34,19 +34,10 @@ namespace Wrapper
             [FromQuery] string zipcode
             )
         {
-            
+
             //validate url parameters
-            IEnumerable<Lookup> lookups = new List<Lookup>()
-            {
-                new Lookup()
-                {
-                    Address = address,
-                    Unit = unit,
-                    State = state,
-                    City = city,
-                    Zipcode = zipcode
-                }
-            };
+            var lookups = new Lookup(HttpContext.Request.Query)
+                .ToList();
 
             if (RequestValidator.ValuesMissing(lookups))
             {

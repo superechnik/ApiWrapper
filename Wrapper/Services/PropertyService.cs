@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using Lib.Models.PropertyDetails;
-using Lib.Models.Sewer;
 
 namespace Wrapper.Services
 {
@@ -36,7 +35,6 @@ namespace Wrapper.Services
 
             return JsonSerializer.Deserialize<IEnumerable<Root>>(await x.Content.ReadAsStringAsync(), options);
         }
-
         
     }
 }

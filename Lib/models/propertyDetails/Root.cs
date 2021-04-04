@@ -13,9 +13,6 @@ namespace Lib.Models.HouseCanary
         [JsonPropertyName("property/details")]
         public PropertyDetails PropertyDetails { get; set; }
 
-        public IEnumerable<PropertyDetails> ToList() =>
-            new List<PropertyDetails>() { PropertyDetails };
-
         public string SewerType =>
             PropertyDetails
                 .Result
