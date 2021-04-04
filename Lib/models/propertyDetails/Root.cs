@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Lib.Models.Sewer;
 
 namespace Lib.Models.HouseCanary
 {
@@ -11,5 +12,6 @@ namespace Lib.Models.HouseCanary
     {
         [JsonPropertyName("property/details")]
         public PropertyDetails PropertyDetails { get; set; }
+
     }
 }

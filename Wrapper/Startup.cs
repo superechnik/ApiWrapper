@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Wrapper.Services;
 
 namespace Wrapper
 {
@@ -32,6 +33,12 @@ namespace Wrapper
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Wrapper", Version = "v1" });
             });
+
+            services.AddHttpClient<IPropertyService, PropertyService>()
+                .SetHandlerLifetime(TimeSpan.FromMinutes(10));
+
+            services.AddScoped<IPropertyService, PropertyService>();
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

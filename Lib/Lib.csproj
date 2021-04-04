@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="services\mock\" />
+    <Folder Include="Services\mock\" />
   </ItemGroup>
 
   <ItemGroup>

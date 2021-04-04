@@ -4,6 +4,7 @@ using Lib.Services.Mock;
 using System.Collections.Generic;
 using Lib.Models.PropertyDetails;
 using Lib.Models.HouseCanary;
+using Lib.Models.Sewer;
 
 namespace Fake
 {
@@ -30,6 +31,7 @@ namespace Fake
         public async Task<IActionResult> Details([FromQuery] string address, int zipCode)
         {
             return await Task.Run( () => Ok(_responseMocker.MockResponse()));
+        
         }
 
         /// <summary>
