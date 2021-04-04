@@ -6,28 +6,23 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Lib.Models.PropertyDetails;
 using System.IO;
-using System;
-using System.Diagnostics;
 
 namespace Wrapper.Services
 {
     public class PropertyService : IPropertyService
     {
-        const string baseUrl = "https://localhost:4431/api/property";
-        
         private readonly HttpClient _http;
         public PropertyService(HttpClient http)
         {
             _http = http;
         }
 
-        public async Task<Root> GetPropertyData(Lookup lookup)
+        public async Task<Root> GetPropertyData(Lookup lookup, string baseUri)
         {
-            Debug.WriteLine($"oh!: {lookup.ToQueryString()}");
-            return await _http.GetFromJsonAsync<Root>(Path.Combine(baseUrl,lookup.ToQueryString()));
+            return await _http.GetFromJsonAsync<Root>(Path.Combine(baseUri,lookup.ToQueryString()));
         }
 
-        public async Task<IEnumerable<Root>> GetPropertyData(IEnumerable<Lookup> lookup)
+        public async Task<IEnumerable<Root>> GetPropertyData(IEnumerable<Lookup> lookup, string baseUri)
         {
 
             var options = new JsonSerializerOptions
@@ -35,11 +30,10 @@ namespace Wrapper.Services
                 PropertyNameCaseInsensitive = true,
             };
 
-            var x = await _http.PostAsJsonAsync(baseUrl, lookup);
+            var x = await _http.PostAsJsonAsync(baseUri, lookup);
 
             return JsonSerializer.Deserialize<IEnumerable<Root>>(await x.Content.ReadAsStringAsync(), options);
         }
-
-        
+ 
     }
 }

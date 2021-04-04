@@ -4,9 +4,11 @@ using Lib.Services.Validation;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Wrapper.Models;
 using Wrapper.Services;
 
 namespace Wrapper
@@ -19,13 +21,17 @@ namespace Wrapper
     {
         private readonly IPropertyService _propertyService;
         private readonly ILogger<PropertyController> _logger;
+        private readonly HouseCanaryOptions _options;
 
         public PropertyController(
             IPropertyService propertyService,
-            ILogger<PropertyController> logger)
+            ILogger<PropertyController> logger,
+            IOptions<HouseCanaryOptions> options
+            )
         {
             _propertyService = propertyService;
             _logger = logger;
+            _options = options.Value;
         }
 
         /// <summary>
@@ -59,16 +65,18 @@ namespace Wrapper
             try
             {
 
-                var data = await _propertyService.GetPropertyData(lookups.FirstOrDefault());
+                var data = await _propertyService.GetPropertyData(lookups.FirstOrDefault(), _options.BaseUri);
 
                 return Ok(data.GetSewerResponse());
 
             }
             catch (System.Exception ex)
             {
+            
                 _logger.LogError(ex.Message);
                 throw;
             }
+            
         }
 
         /// <summary>
@@ -86,7 +94,7 @@ namespace Wrapper
 
             try
             {
-                var data = await _propertyService.GetPropertyData(lookups);
+                var data = await _propertyService.GetPropertyData(lookups, _options.BaseUri);
 
                 return Ok(data.GetSewerResponse());
 
