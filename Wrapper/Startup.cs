@@ -1,16 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Wrapper.Models;
 using Wrapper.Services;
 
 namespace Wrapper
@@ -27,7 +22,9 @@ namespace Wrapper
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            //read api base URI into options
+            services.Configure<HouseCanaryOptions>(Configuration.GetSection("HouseCanaryOptions"));
+    
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

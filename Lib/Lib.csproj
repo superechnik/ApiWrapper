@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Mock\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Faker.Net" Version="1.5.126" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.4" />
   </ItemGroup>
 
 </Project>
