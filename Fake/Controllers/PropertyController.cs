@@ -38,25 +38,16 @@ namespace Fake
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> Details(
-            [FromQuery] string address,
-            [FromQuery] string unit,
-            [FromQuery] string state,
-            [FromQuery] string city,
-            [FromQuery] string zipcode
+            //[FromQuery] string address,
+            //[FromQuery] string unit,
+            //[FromQuery] string state,
+            //[FromQuery] string city,
+            //[FromQuery] string zipcode
             )
         {
-            //validate url parameters
-            var lookups = new List<Lookup>()
-            {
-                new Lookup()
-                {
-                    Address = address,
-                    Unit = unit,
-                    State = state,
-                    City = city,
-                    Zipcode = zipcode
-                }
-            };
+            //validate input
+            var lookups = new Lookup(HttpContext.Request.Query)
+                .ToList();
 
             if (RequestValidator.ValuesMissing(lookups))
             {

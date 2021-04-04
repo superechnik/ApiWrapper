@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Wrapper.Tests
 {
-    public class UriTests
+    public class LookupTests
     {
         [Fact]
         public void LoggerQueryBuilderWorksWithAllValues()
