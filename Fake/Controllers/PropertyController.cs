@@ -38,11 +38,11 @@ namespace Fake
         /// </returns>
         [HttpGet]
         public async Task<IActionResult> Details(
-            //[FromQuery] string address,
-            //[FromQuery] string unit,
-            //[FromQuery] string state,
-            //[FromQuery] string city,
-            //[FromQuery] string zipcode
+            [FromQuery] string address,
+            [FromQuery] string unit,
+            [FromQuery] string state,
+            [FromQuery] string city,
+            [FromQuery] string zipcode
             )
         {
             //validate input

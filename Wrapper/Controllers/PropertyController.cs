@@ -45,11 +45,11 @@ namespace Wrapper
         /// <returns>SewerResponse</returns>
         [HttpGet]
         public async Task<IActionResult> Get (
-            //[FromQuery] string address,
-            //[FromQuery] string unit,
-            //[FromQuery] string state,
-            //[FromQuery] string city,
-            //[FromQuery] string zipcode
+            [FromQuery] string address,
+            [FromQuery] string unit,
+            [FromQuery] string state,
+            [FromQuery] string city,
+            [FromQuery] string zipcode
             )
         {
 
