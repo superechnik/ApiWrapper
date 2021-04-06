@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using Wrapper.Models;
-using Wrapper.Services;
+using Wrapper.Configuration;
+using Lib.Services.Wrapper;
 
 namespace Wrapper
 {

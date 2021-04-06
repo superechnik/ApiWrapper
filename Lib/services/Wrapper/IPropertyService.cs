@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Lib.Models.HouseCanary;
 using Lib.Models.PropertyDetails;
 
-namespace Wrapper.Services
+namespace Lib.Services.Wrapper
 {
     public interface IPropertyService
     {
