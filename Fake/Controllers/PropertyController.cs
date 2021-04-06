@@ -55,7 +55,7 @@ namespace Fake
 
             if (RequestValidator.ValuesMissing(lookups))
             {
-                return BadRequest(new BadRequestResponse(BadQueryRequestResponse, 400));
+                return BadRequest(new ErrorResponse(BadQueryRequestResponse, 400));
             }
             try
             {
@@ -66,7 +66,7 @@ namespace Fake
             {
                 _logger.LogError(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                 new BadRequestResponse(ex.Message, 500)
+                 new ErrorResponse(ex.Message, 500)
                 );
             }
 
@@ -85,7 +85,7 @@ namespace Fake
             //validate model
             if (RequestValidator.ValuesMissing(lookup))
             {
-                return BadRequest(new BadRequestResponse(BadBodyRequestResponse, 400));
+                return BadRequest(new ErrorResponse(BadBodyRequestResponse, 400));
             }
 
             try
@@ -105,7 +105,7 @@ namespace Fake
             {
                 _logger.LogError(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                 new BadRequestResponse(ex.Message, 500)
+                 new ErrorResponse(ex.Message, 500)
                 );
             }
 
