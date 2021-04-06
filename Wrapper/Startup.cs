@@ -33,9 +33,6 @@ namespace Wrapper
 
             services.AddHttpClient<IPropertyService, PropertyService>()
                 .SetHandlerLifetime(TimeSpan.FromMinutes(10));
-
-            services.AddScoped<IPropertyService, PropertyService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
