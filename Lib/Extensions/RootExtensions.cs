@@ -14,7 +14,7 @@ namespace Lib.Extensions
         public static SewerResponse GetSewerResponse(this Root root) =>
             new()
             {
-                SewerType = root.SewerType,
+                SewerType = root.SewerType(),
                 IsSeptic = root.IsSeptic()
             };
 

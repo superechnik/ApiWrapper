@@ -6,6 +6,8 @@ using Lib.Models.PropertyDetails;
 using Lib.Models.HouseCanary;
 using Microsoft.Extensions.Logging;
 using Lib.Services.Validation;
+using Lib.Models.Error;
+using Microsoft.AspNetCore.Http;
 
 namespace Fake
 {
@@ -15,6 +17,8 @@ namespace Fake
     {
         private readonly IResponseMocker _responseMocker;
         private readonly ILogger<PropertyController> _logger;
+        private const string BadQueryRequestResponse = "Missing required parameter in the query string";
+        private const string BadBodyRequestResponse = "Missing required parameter in the request body";
 
         public PropertyController(
             IResponseMocker responseMocker,
@@ -51,7 +55,7 @@ namespace Fake
 
             if (RequestValidator.ValuesMissing(lookups))
             {
-                return BadRequest("Url parameters must contain at least one non null value");
+                return BadRequest(new BadRequestResponse(BadQueryRequestResponse, 400));
             }
             try
             {
@@ -61,7 +65,9 @@ namespace Fake
             catch (System.Exception ex)
             {
                 _logger.LogError(ex.Message);
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                 new BadRequestResponse(ex.Message, 500)
+                );
             }
 
         }
@@ -79,7 +85,7 @@ namespace Fake
             //validate model
             if (RequestValidator.ValuesMissing(lookup))
             {
-                return BadRequest("All request bodies must contain at least one non null value");
+                return BadRequest(new BadRequestResponse(BadBodyRequestResponse, 400));
             }
 
             try
@@ -98,10 +104,12 @@ namespace Fake
             catch (System.Exception ex)
             {
                 _logger.LogError(ex.Message);
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                 new BadRequestResponse(ex.Message, 500)
+                );
             }
 
         }
 
-    } 
+    }
 }

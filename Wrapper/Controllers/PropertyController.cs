@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Wrapper.Models;
 using Wrapper.Services;
+using Lib.Models.Error;
+using Microsoft.AspNetCore.Http;
 
 namespace Wrapper
 {
@@ -22,7 +24,6 @@ namespace Wrapper
         private readonly IPropertyService _propertyService;
         private readonly ILogger<PropertyController> _logger;
         private readonly HouseCanaryOptions _options;
-
         public PropertyController(
             IPropertyService propertyService,
             ILogger<PropertyController> logger,
@@ -44,7 +45,7 @@ namespace Wrapper
         /// <param name="zipcode"></param>
         /// <returns>SewerResponse</returns>
         [HttpGet]
-        public async Task<IActionResult> Get (
+        public async Task<IActionResult> Get(
             [FromQuery] string address,
             [FromQuery] string unit,
             [FromQuery] string state,
@@ -59,24 +60,29 @@ namespace Wrapper
 
             if (RequestValidator.ValuesMissing(lookups))
             {
-                return BadRequest("Url parameters must contain non null property identifiers");
+                return BadRequest(
+                    new BadRequestResponse(ResponseMessages.GetResponseMessage(400), 400)
+                    );
             }
 
             try
             {
 
-                var data = await _propertyService.GetPropertyData(lookups.FirstOrDefault(), _options.BaseUri);
+                var data = await _propertyService
+                    .GetPropertyData(lookups.FirstOrDefault(), _options.BaseUri);
 
                 return Ok(data.GetSewerResponse());
 
             }
             catch (System.Exception ex)
             {
-            
+
                 _logger.LogError(ex.Message);
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                 new BadRequestResponse(ex.Message, 500)
+                );
             }
-            
+
         }
 
         /// <summary>
@@ -89,7 +95,9 @@ namespace Wrapper
         {
             if (RequestValidator.ValuesMissing(lookups))
             {
-                return BadRequest("Request body parameters must contain non null property identifiers");
+                return BadRequest(
+                    new BadRequestResponse(ResponseMessages.GetResponseMessage(400), 400)
+                    );
             }
 
             try
@@ -102,7 +110,9 @@ namespace Wrapper
             catch (System.Exception ex)
             {
                 _logger.LogError(ex.Message);
-                throw;
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                 new BadRequestResponse(ex.Message, 500)
+                );
             }
 
         }

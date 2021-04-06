@@ -24,7 +24,7 @@ namespace Wrapper
         {
             //read api base URI into options
             services.Configure<HouseCanaryOptions>(Configuration.GetSection("HouseCanaryOptions"));
-    
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -35,7 +35,7 @@ namespace Wrapper
                 .SetHandlerLifetime(TimeSpan.FromMinutes(10));
 
             services.AddScoped<IPropertyService, PropertyService>();
-                
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

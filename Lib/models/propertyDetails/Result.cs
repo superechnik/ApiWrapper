@@ -1,8 +1,10 @@
-namespace Lib.Models.HouseCanary{
-    public class Result {
+namespace Lib.Models.HouseCanary
+{
+    public class Result
+    {
 
-        public Property Property {get; set;}
-        public Assessment Assessment {get; set;}
+        public Property Property { get; set; }
+        public Assessment Assessment { get; set; }
 
     }
 }

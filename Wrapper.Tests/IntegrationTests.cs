@@ -20,7 +20,7 @@ namespace Wrapper.Tests
             var response = await client.GetAsync(Path.Combine(baseUri, query));
 
             Assert.True(response.IsSuccessStatusCode);
-            
+
         }
 
         [Theory]

@@ -7,7 +7,7 @@ namespace Lib.Models.HouseCanary
         [JsonPropertyName("property/details")]
         public PropertyDetails PropertyDetails { get; set; }
 
-        public string SewerType =>
+        public string SewerType() =>
             PropertyDetails
                 .Result
                 .Property
@@ -15,7 +15,7 @@ namespace Lib.Models.HouseCanary
 
         public bool IsSeptic()
         {
-            var sewer = SewerType;
+            var sewer = SewerType();
 
             return sewer is not null && sewer == "Septic";
 
