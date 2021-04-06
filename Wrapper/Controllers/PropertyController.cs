@@ -61,7 +61,7 @@ namespace Wrapper
             if (RequestValidator.ValuesMissing(lookups))
             {
                 return BadRequest(
-                    new BadRequestResponse(ResponseMessages.GetResponseMessage(400), 400)
+                    new ErrorResponse(ResponseMessages.GetResponseMessage(400), 400)
                     );
             }
 
@@ -79,7 +79,7 @@ namespace Wrapper
 
                 _logger.LogError(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                 new BadRequestResponse(ex.Message, 500)
+                 new ErrorResponse(ex.Message, 500)
                 );
             }
 
@@ -96,7 +96,7 @@ namespace Wrapper
             if (RequestValidator.ValuesMissing(lookups))
             {
                 return BadRequest(
-                    new BadRequestResponse(ResponseMessages.GetResponseMessage(400), 400)
+                    new ErrorResponse(ResponseMessages.GetResponseMessage(400), 400)
                     );
             }
 
@@ -111,7 +111,7 @@ namespace Wrapper
             {
                 _logger.LogError(ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError,
-                 new BadRequestResponse(ex.Message, 500)
+                 new ErrorResponse(ex.Message, 500)
                 );
             }
 
