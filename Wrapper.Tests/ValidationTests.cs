@@ -9,7 +9,7 @@ namespace Wrapper.Tests
     public class ValidationTests
     {
         [Theory]
-        [InlineData("address","city","state","unit","zip")]
+        [InlineData("address", "city", "state", "unit", "zip")]
         [InlineData("address", null, "state", "unit", "zip")]
         [InlineData("address", "city", null, "unit", "zip")]
         [InlineData("address", null, null, null, "zip")]
@@ -29,7 +29,7 @@ namespace Wrapper.Tests
             };
 
             var result = RequestValidator.ValuesMissing(lookups);
-            
+
             Assert.False(result);
         }
 

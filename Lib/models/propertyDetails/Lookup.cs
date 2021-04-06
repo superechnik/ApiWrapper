@@ -11,7 +11,7 @@ namespace Lib.Models.PropertyDetails
     /// </summary>
     public class Lookup
     {
-        public Lookup (IQueryCollection queryCollection)
+        public Lookup(IQueryCollection queryCollection)
         {
             Address = queryCollection.TryGetValue("Address", out var addressValue) ? addressValue.ToString() : null;
             Unit = queryCollection.TryGetValue("Unit", out var unitValue) ? unitValue.ToString() : null;
@@ -22,7 +22,7 @@ namespace Lib.Models.PropertyDetails
 
         public Lookup()
         {
-            
+
         }
 
         public string? Address { get; init; }

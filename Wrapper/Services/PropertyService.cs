@@ -19,7 +19,7 @@ namespace Wrapper.Services
 
         public async Task<Root> GetPropertyData(Lookup lookup, string baseUri)
         {
-            return await _http.GetFromJsonAsync<Root>(Path.Combine(baseUri,lookup.ToQueryString()));
+            return await _http.GetFromJsonAsync<Root>(Path.Combine(baseUri, lookup.ToQueryString()));
         }
 
         public async Task<IEnumerable<Root>> GetPropertyData(IEnumerable<Lookup> lookup, string baseUri)
@@ -34,6 +34,6 @@ namespace Wrapper.Services
 
             return JsonSerializer.Deserialize<IEnumerable<Root>>(await x.Content.ReadAsStringAsync(), options);
         }
- 
+
     }
 }

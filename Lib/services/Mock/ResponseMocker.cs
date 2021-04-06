@@ -78,6 +78,6 @@ namespace Lib.Services.Mock
 
         private static string ReadRandomIndex(string[] arr) =>
             arr[RandomNumber.Next(0, arr.Length - 1)];
-            
+
     }
 }
