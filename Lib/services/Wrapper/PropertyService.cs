@@ -7,7 +7,7 @@ using System.Text.Json;
 using Lib.Models.PropertyDetails;
 using System.IO;
 
-namespace Wrapper.Services
+namespace Lib.Services.Wrapper
 {
     public class PropertyService : IPropertyService
     {

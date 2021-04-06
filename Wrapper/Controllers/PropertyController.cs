@@ -8,8 +8,8 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Wrapper.Models;
-using Wrapper.Services;
+using Wrapper.Configuration;
+using Lib.Services.Wrapper;
 using Lib.Models.Error;
 using Microsoft.AspNetCore.Http;
 

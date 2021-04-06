@@ -1,4 +1,4 @@
-﻿namespace Wrapper.Models
+﻿namespace Wrapper.Configuration
 {
     public class HouseCanaryOptions
     {
