@@ -14,7 +14,7 @@ Once you have the code and SDK, do the following:
 You should have a successful build:
 ![image](https://user-images.githubusercontent.com/10968503/113521652-d35a9b00-9568-11eb-9bf7-715c775a070d.png)
 
-To use the app, Postman, Curl or whatever to the Wrapper endpoint at GET:https://localhost:5001/
+To use the app send a GET request to the Wrapper endpoint at GET:https://localhost:5001/api/property
 
 You also have the option to use the Swagger UI at https://localhost:5001/swagger
 
