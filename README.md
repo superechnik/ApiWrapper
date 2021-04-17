@@ -55,5 +55,9 @@ In new console tabs run:
 
 ![image](https://user-images.githubusercontent.com/10968503/113521994-4e24b580-956b-11eb-88b8-1d259eee788e.png)
 
+### Notes for non-windows environments
+In order to run tests in a non-windows environment, you will have to point the server (Kestrel) to a valid .pfx cert.
 
-
+For example, in a Linux environment, after generating an openSSL .pfx cert I set the following environment variables in `~/.profile`:
+- ASPNETCORE_Kestrel__Certificates__Default__Password={pwd}
+- ASPNETCORE_Kestrel__Certificates__Default__Path={pathToPfx}
