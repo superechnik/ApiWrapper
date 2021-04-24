@@ -37,35 +37,32 @@ namespace Lib.Models.PropertyDetails
         public string ToQueryString()
         {
             var sb = new StringBuilder("?");
-
-            if (Address is not null)
+            
+            foreach(var i in PropertyMap())
             {
-                sb.Append($"Address={Address}&");
+                if (i.Value is not null)
+                {
+                    sb.Append($"{i.Key}={i.Value}&");
+                }
+                
             }
 
-            if (Unit is not null)
-            {
-                sb.Append($"Unit={Unit}&");
-            }
-
-            if (City is not null)
-            {
-                sb.Append($"City={City}&");
-            }
-
-            if (State is not null)
-            {
-                sb.Append($"State={State}&");
-
-            }
-
-            if (Zipcode is not null)
-            {
-                sb.Append($"Zipcode={Zipcode}");
-            }
+            //remove last ampersand
+            if (sb.Length > 1)
+            sb.Length--;
 
             return sb.ToString();
         }
 
+        //This map to provide an iterable collection of props without using reflection
+        private Dictionary<string,string?> PropertyMap() =>
+            new()
+            {
+                {"Address", Address},
+                {"Unit", Unit},
+                {"City", City},
+                {"State", State},
+                {"Zipcode", Zipcode},
+            };
     }
 }
